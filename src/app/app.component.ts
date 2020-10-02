@@ -14,36 +14,31 @@ export class AppComponent implements OnInit {
   public appPages = [
     {
       title: 'My Diet',
-      url: '/folder/MyDiet',
+      url: '/home',
       icon: 'mail',
     },
     {
-      title: 'Outbox',
-      url: '/folder/Outbox',
+      title: 'Profile',
+      url: '/folder/Profile',
       icon: 'paper-plane',
     },
     {
-      title: 'Favorites',
-      url: '/folder/Favorites',
+      title: 'Progress',
+      url: '/folder/Progress',
       icon: 'heart',
     },
     {
-      title: 'Archived',
-      url: '/folder/Archived',
+      title: 'Plans',
+      url: '/folder/Plans',
       icon: 'archive',
     },
     {
-      title: 'Trash',
-      url: '/folder/Trash',
+      title: 'Signout',
+      url: '/login',
       icon: 'trash',
     },
-    {
-      title: 'Spam',
-      url: '/folder/Spam',
-      icon: 'warning',
-    },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  public labels = [];
 
   constructor(
     private platform: Platform,
