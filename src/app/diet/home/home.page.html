@@ -25,7 +25,7 @@
     <ion-button [disabled]="true" (click)="menu.slideTo(1)">LUNCH</ion-button>
     <ion-button (click)="menu.slideTo(2)">DINNER</ion-button>
   </ion-buttons>
-  <ion-slides #menu pager="true" [options]="slidesOptions">
+  <ion-slides #menu pager="false" [options]="slidesOptions">
     <ion-slide>
       <ion-list>
         <ion-item>
@@ -66,4 +66,19 @@
       </ion-list>
     </ion-slide>
   </ion-slides>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button><ion-icon name="add"></ion-icon></ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button>
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon
+          name="settings-outline"
+          [routerLink]="['/folder/Profile']"
+        ></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

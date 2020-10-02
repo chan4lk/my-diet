@@ -9,3 +9,12 @@ ion-menu-button {
 ion-content {
   --background: url('/assets/images/background.svg') no-repeat 100% 100%;
 }
+
+div.swiper-pagination {
+  top: 20px;
+  bottom: inherit;
+}
+
+ion-fab-button {
+  --background: var(--ion-color-tertiary);
+}
