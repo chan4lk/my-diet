@@ -1,0 +1,24 @@
+ion-content {
+  --background: url('/assets/images/Login.svg') no-repeat 100% 100%;
+
+  .app-title {
+    font-size: 4rem;
+  }
+
+  .form {
+    ion-item {
+      --background: #eee;
+      --color: #000;
+    }
+
+    ion-input {
+      --color: #000;
+      --placeholder-color: #000;
+    }
+
+    ion-button {
+      --padding-top: 24px;
+      --padding-bottom: 24px;
+    }
+  }
+}
