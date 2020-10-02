@@ -26,3 +26,7 @@ ion-menu-button {
 #container a {
   text-decoration: none;
 }
+
+ion-content {
+  --background: url('/assets/images/background.svg') no-repeat 100% 100%;
+}

@@ -1,5 +1,7 @@
 {
   "name": "My Diet",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
