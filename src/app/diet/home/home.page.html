@@ -20,15 +20,50 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-list>
-    <ion-item>
-      <app-food-item></app-food-item>
-    </ion-item>
-    <ion-item>
-      <app-food-item></app-food-item>
-    </ion-item>
-    <ion-item>
-      <app-food-item></app-food-item>
-    </ion-item>
-  </ion-list>
+  <ion-buttons class="ion-padding">
+    <ion-button (click)="menu.slideTo(0)">BREAKFAST</ion-button>
+    <ion-button [disabled]="true" (click)="menu.slideTo(1)">LUNCH</ion-button>
+    <ion-button (click)="menu.slideTo(2)">DINNER</ion-button>
+  </ion-buttons>
+  <ion-slides #menu pager="true" [options]="slidesOptions">
+    <ion-slide>
+      <ion-list>
+        <ion-item>
+          <app-food-item></app-food-item>
+        </ion-item>
+        <ion-item>
+          <app-food-item></app-food-item>
+        </ion-item>
+        <ion-item>
+          <app-food-item></app-food-item>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <ion-list>
+        <ion-item>
+          <app-food-item></app-food-item>
+        </ion-item>
+        <ion-item>
+          <app-food-item></app-food-item>
+        </ion-item>
+        <ion-item>
+          <app-food-item></app-food-item>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <ion-list>
+        <ion-item>
+          <app-food-item></app-food-item>
+        </ion-item>
+        <ion-item>
+          <app-food-item></app-food-item>
+        </ion-item>
+        <ion-item>
+          <app-food-item></app-food-item>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
