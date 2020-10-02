@@ -18,7 +18,9 @@
       <ion-input value="admin" type="password"></ion-input>
     </ion-item>
 
-    <ion-button expand="full" class="ion-padding">LOGIN</ion-button>
+    <ion-button [routerLink]="['/home']" expand="full" class="ion-padding"
+      >LOGIN</ion-button
+    >
     <ion-button
       [routerLink]="['/signup']"
       fill="clear"

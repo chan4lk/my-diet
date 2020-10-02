@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>My Diet</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button [routerLink]="['/login']">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="6">
+        <app-gauge></app-gauge>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list>
+    <ion-item>
+      <app-food-item></app-food-item>
+    </ion-item>
+    <ion-item>
+      <app-food-item></app-food-item>
+    </ion-item>
+    <ion-item>
+      <app-food-item></app-food-item>
+    </ion-item>
+  </ion-list>
+</ion-content>
