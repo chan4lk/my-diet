@@ -19,13 +19,43 @@
         <app-gauge></app-gauge>
       </ion-col>
     </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="4">
+        <ion-button
+          [disabled]="currentMenu === 0"
+          [color]="currentMenu !== 0 ? 'dark': 'primary'"
+          expand="block"
+          (click)="menu.slideTo(0)"
+          >BREAKFAST</ion-button
+        >
+      </ion-col>
+      <ion-col size="4">
+        <ion-button
+          [disabled]="currentMenu === 1"
+          [color]="currentMenu !== 1 ? 'dark': 'primary'"
+          expand="block"
+          (click)="menu.slideTo(1)"
+        >
+          LUNCH
+        </ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button
+          [disabled]="currentMenu === 2"
+          [color]="currentMenu !== 2 ? 'dark': 'primary'"
+          expand="block"
+          (click)="menu.slideTo(2)"
+          >DINNER</ion-button
+        >
+      </ion-col>
+    </ion-row>
   </ion-grid>
-  <ion-buttons class="ion-padding">
-    <ion-button (click)="menu.slideTo(0)">BREAKFAST</ion-button>
-    <ion-button [disabled]="true" (click)="menu.slideTo(1)">LUNCH</ion-button>
-    <ion-button (click)="menu.slideTo(2)">DINNER</ion-button>
-  </ion-buttons>
-  <ion-slides #menu pager="false" [options]="slidesOptions">
+  <ion-slides
+    (ionSlideDidChange)="slideChanged(menu)"
+    #menu
+    pager="false"
+    [options]="slidesOptions"
+  >
     <ion-slide>
       <ion-list>
         <ion-item>
