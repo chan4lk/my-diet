@@ -26,9 +26,7 @@
       <ion-input type="number" value="100"></ion-input>
     </ion-item>
   </div>
-  <ion-item>
-    <app-food-item [isButton]="false" [showValue]="false"></app-food-item>
-  </ion-item>
+
   <ion-button [routerLink]="['/home']" expand="full" class="ion-padding"
     >SAVE</ion-button
   >
@@ -36,7 +34,10 @@
     [routerLink]="['/home']"
     expand="full"
     color="danger"
-    class="ion-padding"
+    class="ion-padding ion-margin-bottom"
     >REMOVE</ion-button
   >
+  <ion-item>
+    <app-food-item [isButton]="false" [showValue]="false"></app-food-item>
+  </ion-item>
 </ion-content>
