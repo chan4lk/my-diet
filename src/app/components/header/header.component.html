@@ -5,11 +5,11 @@
     </ion-buttons>
     <ion-title>{{ header }}</ion-title>
     <ion-buttons slot="secondary">
-      <ion-button [routerLink]="['/login']">
-        <ion-icon name="log-out-outline"></ion-icon>
-      </ion-button>
       <ion-button [routerLink]="['/profile']">
         <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/login']">
+        <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

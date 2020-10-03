@@ -1,6 +1,8 @@
 ion-content {
   --background: url('/assets/images/background.svg') no-repeat 100% 100%;
-
+  .app-title {
+    font-size: 4rem;
+  }
   .form {
     ion-item {
       --background: #eee;
