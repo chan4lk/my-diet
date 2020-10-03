@@ -5,10 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { HomePageRoutingModule } from './home-routing.module';
-
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { HomePage } from './home.page';
 import { ComponentModule } from 'src/app/components/components.module';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -18,5 +17,6 @@ import { ComponentModule } from 'src/app/components/components.module';
     HomePageRoutingModule,
   ],
   declarations: [HomePage],
+  providers: [LocalNotifications],
 })
 export class HomePageModule {}
