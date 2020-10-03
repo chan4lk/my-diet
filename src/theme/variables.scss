@@ -76,6 +76,11 @@
 }
 
 :root {
+  --ion-safe-area-top: 20px;
+  --ion-safe-area-bottom: 22px;
+}
+
+:root {
   --ion-color-custom: #18756d;
   --ion-color-custom-rgb: 24, 117, 109;
   --ion-color-custom-contrast: #ffffff;

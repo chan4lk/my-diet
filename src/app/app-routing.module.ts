@@ -25,6 +25,14 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./diet/home/home.module').then( m => m.HomePageModule)
   },
+  {
+    path: 'add',
+    loadChildren: () => import('./diet/add/add.module').then( m => m.AddPageModule)
+  },
+  {
+    path: 'edit',
+    loadChildren: () => import('./diet/edit/edit.module').then( m => m.EditPageModule)
+  },
 ];
 
 @NgModule({

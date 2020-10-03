@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Edit Food</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button [routerLink]="['/login']">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-bottom">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="6">
+        <app-gauge></app-gauge>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="form">
+    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
+      <ion-label position="floating">Enter Weight</ion-label>
+      <ion-input type="number" value="100"></ion-input>
+    </ion-item>
+  </div>
+  <ion-item>
+    <app-food-item [isButton]="false" [showValue]="false"></app-food-item>
+  </ion-item>
+  <ion-button [routerLink]="['/home']" expand="full" class="ion-padding"
+    >SAVE</ion-button
+  >
+  <ion-button
+    [routerLink]="['/home']"
+    expand="full"
+    color="danger"
+    class="ion-padding"
+    >REMOVE</ion-button
+  >
+</ion-content>
