@@ -1,3 +1,21 @@
 <app-header [header]="'Progress'"></app-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <ion-item>
+    <ion-label>MM DD YY</ion-label>
+    <ion-datetime
+      mode="md"
+      displayFormat="MM DD YY"
+      placeholder="Select Date"
+    ></ion-datetime>
+  </ion-item>
+  <div class="form">
+    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
+      <ion-label position="floating">Enter weight(kg)</ion-label>
+      <ion-input value="70" type="number"></ion-input>
+    </ion-item>
+    <ion-button [routerLink]="['/home']" expand="full" class="ion-padding"
+      >SAVE</ion-button
+    >
+  </div>
+</ion-content>
