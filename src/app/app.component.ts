@@ -19,17 +19,22 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Profile',
-      url: '/folder/Profile',
+      url: '/profile',
       icon: 'paper-plane',
     },
     {
       title: 'Progress',
-      url: '/folder/Progress',
+      url: '/progress',
       icon: 'heart',
     },
     {
+      title: 'Report',
+      url: '/report',
+      icon: 'calendar',
+    },
+    {
       title: 'Plans',
-      url: '/folder/Plans',
+      url: '/plan',
       icon: 'archive',
     },
     {

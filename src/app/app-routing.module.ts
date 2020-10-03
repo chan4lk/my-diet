@@ -33,6 +33,22 @@ const routes: Routes = [
     path: 'edit',
     loadChildren: () => import('./diet/edit/edit.module').then( m => m.EditPageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./config/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'plan',
+    loadChildren: () => import('./config/plan/plan.module').then( m => m.PlanPageModule)
+  },
+  {
+    path: 'progress',
+    loadChildren: () => import('./config/progress/progress.module').then( m => m.ProgressPageModule)
+  },
+  {
+    path: 'report',
+    loadChildren: () => import('./config/report/report.module').then( m => m.ReportPageModule)
+  },
 ];
 
 @NgModule({
