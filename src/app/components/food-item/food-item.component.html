@@ -1,49 +1,24 @@
-<ion-card
-  [button]="isButton"
-  [routerLink]="['/edit']"
-  class="ion-no-margin ion-margin-top ion-margin-bottom"
->
-  <img src="/assets/images/salad.jpg" />
-  <ion-header>
-    <ion-card-title class="ion-padding" color="secondary"
-      >Vegetable Soup</ion-card-title
-    >
-  </ion-header>
-  <ion-card-content>
-    <ion-fab
-      *ngIf="showValue"
-      vertical="top"
-      horizontal="end"
-      edge
-      slot="fixed"
-    >
-      <span>100g</span>
-    </ion-fab>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="8" size-sm>
-          <ion-text color="primary">Protiene</ion-text>
-        </ion-col>
-        <ion-col size="4" size-sm>
-          <ion-text color="secondary">243</ion-text>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="8" size-sm>
-          <ion-text color="primary">Carbohydrates</ion-text>
-        </ion-col>
-        <ion-col size="4" size-sm>
-          <ion-text color="secondary">125</ion-text>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="8" size-sm>
-          <ion-text color="primary">Fat</ion-text>
-        </ion-col>
-        <ion-col size="4" size-sm>
-          <ion-text color="secondary">80</ion-text>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card-content>
+<ion-card (click)="navigate()">
+  <div class="img"><img src="/assets/images/salad.jpg" /></div>
+
+  <div class="info">
+    <div class="title">Vegetable Soup</div>
+    <div class="breakdown">
+      <table>
+        <tr>
+          <td class="label">Protiene</td>
+          <td class="value">243</td>
+        </tr>
+        <tr>
+          <td class="label">Carbohydrates</td>
+          <td class="value">80</td>
+        </tr>
+        <tr>
+          <td class="label">Fat</td>
+          <td class="value">125</td>
+        </tr>
+      </table>
+      <div *ngIf="showValue" class="size">100g</div>
+    </div>
+  </div>
 </ion-card>

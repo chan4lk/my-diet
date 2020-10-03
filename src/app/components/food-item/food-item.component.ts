@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-food-item',
@@ -9,7 +10,11 @@ export class FoodItemComponent implements OnInit {
   @Input() showValue = true;
   @Input() isButton = true;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
+
+  navigate() {
+    this.router.navigate(['/edit']);
+  }
 }
