@@ -7,21 +7,35 @@
     <h1 class="app-title">MY DIET</h1>
   </ion-text>
 
-  <div class="form">
+  <form [formGroup]="form" class="form">
     <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
-      <ion-label position="floating">Enter username</ion-label>
-      <ion-input type="email"></ion-input>
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input formControlName="firstName" type="text"></ion-input>
     </ion-item>
     <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
-      <ion-label position="floating">Enter Password</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input formControlName="lastName" type="email"></ion-input>
     </ion-item>
     <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
-      <ion-label position="floating">Enter Confirm Password</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
+      <ion-label position="floating">Confirm Password</ion-label>
+      <ion-input formControlName="confirmPassword" type="password"></ion-input>
     </ion-item>
 
-    <ion-button expand="full" class="ion-padding">REGISTER</ion-button>
+    <ion-button
+      [disabled]="form.invalid"
+      expand="full"
+      (click)="register()"
+      class="ion-padding"
+      >REGISTER</ion-button
+    >
     <ion-button
       [routerLink]="['/login']"
       fill="clear"
@@ -29,5 +43,5 @@
       class="ion-padding ion-margin-top"
       >LOGIN</ion-button
     >
-  </div>
+  </form>
 </ion-content>
