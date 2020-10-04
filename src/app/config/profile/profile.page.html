@@ -13,11 +13,11 @@
         </ion-item>
         <ion-item class="ion-margin-top">
           <ion-label position="floating">Weight(kg)</ion-label>
-          <ion-input formControlName="weight" type="email"></ion-input>
+          <ion-input formControlName="weight" type="number"></ion-input>
         </ion-item>
         <ion-item class="ion-margin-top">
           <ion-label position="floating">Age</ion-label>
-          <ion-input formControlName="age" type="email"></ion-input>
+          <ion-input formControlName="age" type="number"></ion-input>
         </ion-item>
         <ion-list class="ion-margin-top">
           <ion-radio-group formControlName="gender">
@@ -45,6 +45,90 @@
     </ion-slide>
     <ion-slide>
       <form
+        [formGroup]="activityForm"
+        class="form ion-padding-start ion-padding-end"
+      >
+        <ion-text>
+          <h1>How Active You Are ?</h1>
+        </ion-text>
+        <ion-list class="ion-margin-top">
+          <ion-radio-group formControlName="activityLevel">
+            <ion-item>
+              <ion-label
+                ><h2>Not Very Active</h2>
+                <ion-text color="medium"
+                  ><p>
+                    Seated work with no option of moving arround and little or
+                    no stenuous leisure activity
+                  </p></ion-text
+                ></ion-label
+              >
+              <ion-radio value="0"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label
+                ><h2>Lightly Active</h2>
+                <ion-text color="medium"
+                  ><p>
+                    Seated work with discretion and requirement to move arround
+                    but little or no stenous leisure activity
+                  </p></ion-text
+                ></ion-label
+              >
+              <ion-radio value="1"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label
+                ><h2>Active</h2>
+                <ion-text color="medium"
+                  ><p>
+                    Standing work(e.g. Housework Shop assitent etc.)
+                  </p></ion-text
+                ></ion-label
+              >
+              <ion-radio value="2"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label
+                ><h2>Very Active</h2>
+                <ion-text color="medium"
+                  ><p>Strenous work or highly leisure acitivty</p></ion-text
+                ></ion-label
+              >
+              <ion-radio value="3"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label
+                ><h2>Extra Active</h2>
+                <ion-text color="medium"
+                  ><p>
+                    Very hard exercise, physical job or sports 6=7 days/week
+                  </p></ion-text
+                ></ion-label
+              >
+              <ion-radio value="4"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label
+                ><h2>Professional</h2>
+                <ion-text color="medium"><p>Athlete</p></ion-text></ion-label
+              >
+              <ion-radio value="3"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+        <ion-button
+          [disabled]="targetForm.invalid"
+          expand="full"
+          (click)="next(slides)"
+          class="ion-margin-top"
+          >NEXT</ion-button
+        >
+      </form>
+    </ion-slide>
+    <ion-slide>
+      <form
         [formGroup]="targetForm"
         class="form ion-padding-start ion-padding-end"
       >
@@ -52,7 +136,7 @@
           <h1>I Want To</h1>
         </ion-text>
         <ion-list class="ion-margin-top">
-          <ion-radio-group formControlName="target" (ionChange)="next(slides)">
+          <ion-radio-group formControlName="target">
             <ion-item>
               <ion-label>Loose Weight</ion-label>
               <ion-radio value="0"></ion-radio>
@@ -68,16 +152,81 @@
             </ion-item>
           </ion-radio-group>
         </ion-list>
+        <ion-button
+          [disabled]="targetForm.invalid"
+          expand="full"
+          (click)="next(slides)"
+          class="ion-margin-top"
+          >NEXT</ion-button
+        >
       </form>
     </ion-slide>
     <ion-slide>
-      <ion-button
-        [disabled]="form.invalid"
-        expand="full"
-        (click)="save()"
-        class="ion-padding"
-        >SAVE</ion-button
+      <form
+        [formGroup]="goalForm"
+        class="form ion-padding-start ion-padding-end"
       >
+        <ion-text>
+          <h1>Save Profile</h1>
+        </ion-text>
+        <ion-list *ngIf="targetForm.value.target != '1'" class="ion-margin-top">
+          <ion-radio-group formControlName="goal">
+            <ion-list-header>What is your weekly goal?</ion-list-header>
+            <ion-item>
+              <ion-label>
+                <h2>
+                  {{targetForm.value.target == '0' ? 'Reduce': 'Gain'}} 0.25 kg
+                  per week
+                </h2>
+                <h3>Easy</h3>
+              </ion-label>
+              <ion-radio value="0"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>
+                <h2>
+                  {{targetForm.value.target == '0' ? 'Reduce': 'Gain'}} 0.5 kg
+                  per week
+                </h2>
+                <h3>Recommended</h3>
+              </ion-label>
+              <ion-radio value="1"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <h2>
+                  {{targetForm.value.target == '0' ? 'Reduce': 'Gain'}} 0.75 kg
+                  per week
+                </h2>
+                <h3>Hard</h3>
+              </ion-label>
+              <ion-radio value="2"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <h2>
+                  {{targetForm.value.target == '0' ? 'Reduce': 'Gain'}} 1 kg per
+                  week
+                </h2>
+                <h3>Very Hard</h3>
+              </ion-label>
+              <ion-radio value="3"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+        <ion-item *ngIf="targetForm.value.target != '1'" class="ion-margin-top">
+          <ion-label position="floating">Target Weight(kg)</ion-label>
+          <ion-input formControlName="weight" type="number"></ion-input>
+        </ion-item>
+        <ion-button
+          [disabled]="form.invalid || activityForm.invalid || targetForm.invalid || goalForm.invalid"
+          expand="full"
+          (click)="save()"
+          class="ion-margin-top"
+          >SAVE</ion-button
+        >
+      </form>
     </ion-slide>
   </ion-slides>
 </ion-content>

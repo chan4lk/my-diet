@@ -8,6 +8,11 @@ ion-content {
       --color: #000;
     }
 
+    ion-label {
+      text-overflow: unset;
+      white-space: unset;
+    }
+
     ion-input {
       --color: #000;
       --placeholder-color: #000;
