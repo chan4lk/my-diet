@@ -1,3 +1,40 @@
 <app-header [header]="'Profile'"></app-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <form [formGroup]="form" class="form">
+    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
+      <ion-label position="floating">Height(cm)</ion-label>
+      <ion-input formControlName="height" type="number"></ion-input>
+    </ion-item>
+    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
+      <ion-label position="floating">Weight(kg)</ion-label>
+      <ion-input formControlName="weight" type="email"></ion-input>
+    </ion-item>
+    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
+      <ion-label position="floating">Age</ion-label>
+      <ion-input formControlName="age" type="email"></ion-input>
+    </ion-item>
+    <ion-list class="ion-padding-start ion-padding-end ion-margin-top">
+      <ion-radio-group formControlName="gender">
+        <ion-list-header>Gender</ion-list-header>
+
+        <ion-item>
+          <ion-label>Male</ion-label>
+          <ion-radio value="0"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Female</ion-label>
+          <ion-radio value="1"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+    <ion-button
+      [disabled]="form.invalid"
+      expand="full"
+      (click)="next()"
+      class="ion-padding"
+      >NEXT</ion-button
+    >
+  </form>
+</ion-content>
