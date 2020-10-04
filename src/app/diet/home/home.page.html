@@ -1,6 +1,9 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content> </ion-refresher-content>
+  </ion-refresher>
   <ion-grid>
     <ion-row class="ion-justify-content-center">
       <ion-col size="6">
@@ -45,15 +48,9 @@
     [options]="slidesOptions"
   >
     <ion-slide>
-      <ion-list>
-        <ion-item>
-          <app-food-item></app-food-item>
-        </ion-item>
-        <ion-item>
-          <app-food-item></app-food-item>
-        </ion-item>
-        <ion-item>
-          <app-food-item></app-food-item>
+      <ion-list *ngIf="diet">
+        <ion-item *ngFor="let item of diet.foodItems">
+          <app-food-item [value]="item"></app-food-item>
         </ion-item>
       </ion-list>
     </ion-slide>

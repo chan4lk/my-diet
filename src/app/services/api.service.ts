@@ -11,33 +11,35 @@ export class ApiService {
    */
   constructor(private http: HttpClient) {}
 
-  get(
+  get<T>(
     url: string,
     headers: { [key: string]: string } = { 'Content-Type': 'application/json' }
   ) {
-    return this.http.get(`${environment.baseUrl}/${url}`, { headers });
+    return this.http.get<T>(`${environment.baseUrl}/${url}`, { headers });
   }
 
-  post(
+  post<T>(
     url: string,
     body: any,
     headers: { [key: string]: string } = { 'Content-Type': 'application/json' }
   ) {
-    return this.http.post(`${environment.baseUrl}/${url}`, body, { headers });
+    return this.http.post<T>(`${environment.baseUrl}/${url}`, body, {
+      headers,
+    });
   }
 
-  put(
+  put<T>(
     url: string,
     body: any,
     headers: { [key: string]: string } = { 'Content-Type': 'application/json' }
   ) {
-    return this.http.put(`${environment.baseUrl}/${url}`, body, { headers });
+    return this.http.put<T>(`${environment.baseUrl}/${url}`, body, { headers });
   }
 
-  delete(
+  delete<T>(
     url: string,
     headers: { [key: string]: string } = { 'Content-Type': 'application/json' }
   ) {
-    return this.http.delete(`${environment.baseUrl}/${url}`, { headers });
+    return this.http.delete<T>(`${environment.baseUrl}/${url}`, { headers });
   }
 }

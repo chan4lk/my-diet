@@ -7,7 +7,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
+import { StoreService } from 'src/app/services/store.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +21,9 @@ export class SignupPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private user: UserService,
+    private store: StoreService
   ) {}
   form: FormGroup;
   ngOnInit() {
@@ -64,6 +69,14 @@ export class SignupPage implements OnInit {
           roles: 1,
         },
       })
-      .subscribe((token) => this.router.navigate(['/profile']));
+      .pipe(
+        switchMap((token) => {
+          return this.user.getByEmail(value.email);
+        })
+      )
+      .subscribe((user) => {
+        this.store.setUser(user);
+        this.router.navigate(['/profile']);
+      });
   }
 }

@@ -2,23 +2,25 @@
   <div class="img"><img src="/assets/images/salad.jpg" /></div>
 
   <div class="info">
-    <div class="title">Vegetable Soup</div>
+    <div class="title">{{ value.name }}</div>
     <div class="breakdown">
       <table>
         <tr>
           <td class="label">Protiene</td>
-          <td class="value">243</td>
+          <td class="value">{{ value.protine }}</td>
         </tr>
         <tr>
           <td class="label">Carbohydrates</td>
-          <td class="value">80</td>
+          <td class="value">{{ value.carbohydrate }}</td>
         </tr>
         <tr>
           <td class="label">Fat</td>
-          <td class="value">125</td>
+          <td class="value">{{ value.fat }}</td>
         </tr>
       </table>
-      <div *ngIf="showValue" class="size">100g</div>
+      <div *ngIf="showValue" class="size">
+        {{ (value.foodQuantity || 0).toFixed(0) }}g
+      </div>
     </div>
   </div>
 </ion-card>

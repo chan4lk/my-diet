@@ -17,25 +17,11 @@ export class AuthService {
   private token = this._token.asObservable();
 
   login(login: string, password: string) {
-    return this.token.pipe(
-      switchMap((token) => {
-        if (token !== '') {
-          return of(token);
-        } else {
-          const storedToken = localStorage.getItem('__token');
-          if (storedToken && storedToken !== '') {
-            this._token.next(storedToken);
-            return of(storedToken);
-          }
-
-          return this.api.post(environment.auth, { login, password }).pipe(
-            map((res: { token: string }) => {
-              localStorage.setItem('__token', res.token);
-              this._token.next(res.token);
-              return res.token;
-            })
-          );
-        }
+    return this.api.post(environment.auth, { login, password }).pipe(
+      map((res: { token: string }) => {
+        localStorage.setItem('__token', res.token);
+        this._token.next(res.token);
+        return res.token;
       })
     );
   }

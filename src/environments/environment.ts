@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   baseUrl: 'https://dieticianweb.azurewebsites.net',
   auth: 'Auths',
-  users: '/Users',
+  users: 'Users',
+  diet: 'Diet',
 };
 
 /*
