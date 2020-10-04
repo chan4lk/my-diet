@@ -10,14 +10,21 @@
   <div class="form">
     <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
       <ion-label position="floating">Enter username</ion-label>
-      <ion-input value="kodithuwakku.uom@gmail.com" type="email"></ion-input>
+      <ion-input
+        #email
+        value="kodithuwakku.uom@gmail.com"
+        type="email"
+      ></ion-input>
     </ion-item>
     <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
       <ion-label position="floating">Enter Password</ion-label>
-      <ion-input value="admin" type="password"></ion-input>
+      <ion-input #password value="admin" type="password"></ion-input>
     </ion-item>
 
-    <ion-button [routerLink]="['/home']" expand="full" class="ion-padding"
+    <ion-button
+      (click)="login(email.value, password.value)"
+      expand="full"
+      class="ion-padding"
       >LOGIN</ion-button
     >
     <ion-button
