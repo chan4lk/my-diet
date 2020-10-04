@@ -1,40 +1,83 @@
 <app-header [header]="'Profile'"></app-header>
 
-<ion-content>
-  <form [formGroup]="form" class="form">
-    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
-      <ion-label position="floating">Height(cm)</ion-label>
-      <ion-input formControlName="height" type="number"></ion-input>
-    </ion-item>
-    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
-      <ion-label position="floating">Weight(kg)</ion-label>
-      <ion-input formControlName="weight" type="email"></ion-input>
-    </ion-item>
-    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
-      <ion-label position="floating">Age</ion-label>
-      <ion-input formControlName="age" type="email"></ion-input>
-    </ion-item>
-    <ion-list class="ion-padding-start ion-padding-end ion-margin-top">
-      <ion-radio-group formControlName="gender">
-        <ion-list-header>Gender</ion-list-header>
-
-        <ion-item>
-          <ion-label>Male</ion-label>
-          <ion-radio value="0"></ion-radio>
+<ion-content class="ion-no-margin ion-no-padding">
+  <ion-slides #slides>
+    <ion-slide>
+      <form [formGroup]="form" class="form ion-padding-start ion-padding-end">
+        <ion-text>
+          <h1>Basic Information</h1>
+        </ion-text>
+        <ion-item class="ion-margin-top">
+          <ion-label position="floating">Height(cm)</ion-label>
+          <ion-input formControlName="height" type="number"></ion-input>
         </ion-item>
-
-        <ion-item>
-          <ion-label>Female</ion-label>
-          <ion-radio value="1"></ion-radio>
+        <ion-item class="ion-margin-top">
+          <ion-label position="floating">Weight(kg)</ion-label>
+          <ion-input formControlName="weight" type="email"></ion-input>
         </ion-item>
-      </ion-radio-group>
-    </ion-list>
-    <ion-button
-      [disabled]="form.invalid"
-      expand="full"
-      (click)="next()"
-      class="ion-padding"
-      >NEXT</ion-button
-    >
-  </form>
+        <ion-item class="ion-margin-top">
+          <ion-label position="floating">Age</ion-label>
+          <ion-input formControlName="age" type="email"></ion-input>
+        </ion-item>
+        <ion-list class="ion-margin-top">
+          <ion-radio-group formControlName="gender">
+            <ion-list-header>Gender</ion-list-header>
+
+            <ion-item>
+              <ion-label>Male</ion-label>
+              <ion-radio value="0"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Female</ion-label>
+              <ion-radio value="1"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+        <ion-button
+          [disabled]="form.invalid"
+          expand="full"
+          (click)="next(slides)"
+          class="ion-margin-top"
+          >NEXT</ion-button
+        >
+      </form>
+    </ion-slide>
+    <ion-slide>
+      <form
+        [formGroup]="targetForm"
+        class="form ion-padding-start ion-padding-end"
+      >
+        <ion-text>
+          <h1>I Want To</h1>
+        </ion-text>
+        <ion-list class="ion-margin-top">
+          <ion-radio-group formControlName="target" (ionChange)="next(slides)">
+            <ion-item>
+              <ion-label>Loose Weight</ion-label>
+              <ion-radio value="0"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Maintain Weight</ion-label>
+              <ion-radio value="1"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Gain Weight</ion-label>
+              <ion-radio value="2"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </form>
+    </ion-slide>
+    <ion-slide>
+      <ion-button
+        [disabled]="form.invalid"
+        expand="full"
+        (click)="save()"
+        class="ion-padding"
+        >SAVE</ion-button
+      >
+    </ion-slide>
+  </ion-slides>
 </ion-content>

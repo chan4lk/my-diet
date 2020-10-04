@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,7 @@ import {
 export class ProfilePage implements OnInit {
   constructor(private fb: FormBuilder) {}
   form: FormGroup;
-
+  targetForm: FormGroup;
   get gender() {
     return this.form.get('gender').value;
   }
@@ -30,7 +31,14 @@ export class ProfilePage implements OnInit {
       age: new FormControl('', Validators.required),
       gender: new FormControl('0', Validators.required),
     });
+
+    this.targetForm = this.fb.group({
+      target: new FormControl('', Validators.required),
+    });
   }
 
-  next() {}
+  next(slides: IonSlides) {
+    slides.slideNext();
+  }
+  save() {}
 }
