@@ -18,6 +18,7 @@ export class StoreService {
     lunch: [],
     dinner: [],
     total: 0,
+    max: 0,
   });
 
   public userData$ = this.user.asObservable();

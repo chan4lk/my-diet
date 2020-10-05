@@ -4,28 +4,35 @@
   <ion-grid>
     <ion-row class="ion-justify-content-center">
       <ion-col size="6">
-        <app-gauge></app-gauge>
+        <app-gauge [amount]="total" [max]="diet.max"></app-gauge>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <div class="form">
+  <form [formGroup]="form" class="form">
     <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
       <ion-label position="floating">Enter Weight</ion-label>
-      <ion-input type="number" value="100"></ion-input>
+      <ion-input type="number" formControlName="weight"></ion-input>
     </ion-item>
-  </div>
-
-  <ion-button [routerLink]="['/home']" expand="full" class="ion-padding"
+  </form>
+  <ion-button
+    [disabled]="form.invalid"
+    (click)="save()"
+    expand="full"
+    class="ion-padding"
     >SAVE</ion-button
   >
   <ion-button
-    [routerLink]="['/home']"
+    (click)="remove()"
     expand="full"
     color="danger"
     class="ion-padding ion-margin-bottom"
     >REMOVE</ion-button
   >
   <ion-item>
-    <app-food-item [isButton]="false" [showValue]="false"></app-food-item>
+    <app-food-item
+      [value]="food"
+      [isButton]="false"
+      [showValue]="false"
+    ></app-food-item>
   </ion-item>
 </ion-content>

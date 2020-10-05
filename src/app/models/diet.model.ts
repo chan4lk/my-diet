@@ -15,6 +15,7 @@ export interface DietDetails {
   lunch: FoodItem[];
   dinner: FoodItem[];
   total: number;
+  max: number;
 }
 
 export interface FoodItem {

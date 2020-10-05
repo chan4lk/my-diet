@@ -5,6 +5,7 @@ import { StoreService } from 'src/app/services/store.service';
 import { DietService } from 'src/app/services/diet.service';
 import { switchMap, takeWhile } from 'rxjs/operators';
 import { DietDetails, DietResponse } from 'src/app/models/diet.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -26,12 +27,14 @@ export class HomePage implements OnInit, ViewWillLeave, ViewWillEnter {
     lunch: [],
     dinner: [],
     total: 0,
+    max: 0,
   };
 
   constructor(
     private localNotifications: LocalNotifications,
     private store: StoreService,
-    private dietService: DietService
+    private dietService: DietService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -60,7 +63,12 @@ export class HomePage implements OnInit, ViewWillLeave, ViewWillEnter {
     this.store.userData$
       .pipe(
         takeWhile(() => this.active),
-        switchMap((user) => this.dietService.getDiet(user.id, new Date()))
+        switchMap((user) => {
+          if (!user.id) {
+            this.router.navigate(['/login']);
+          }
+          return this.dietService.getDiet(user.id, new Date());
+        })
       )
       .subscribe((diet) => {
         const data = this.dietService.format(diet);

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { DietResponse, FoodItem } from '../models/diet.model';
+import { DietDetails, DietResponse, FoodItem } from '../models/diet.model';
 import { ApiService } from './api.service';
+import { toCalaries } from './utils';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class DietService {
     );
   }
 
-  format(diet: DietResponse) {
+  format(diet: DietResponse): DietDetails {
     const breakfast: FoodItem[] = [];
     const lunch: FoodItem[] = [];
     const dinner: FoodItem[] = [];
@@ -38,16 +39,14 @@ export class DietService {
           dinner.push(food);
           break;
       }
-      total +=
-        (food.foodQuantity *
-          (food.protine * 4 + food.carbohydrate * 4 + food.fat * 9)) /
-        100;
+      total += toCalaries(food.foodQuantity, food);
     });
     return {
       breakfast,
       lunch,
       dinner,
       total,
+      max: total,
     };
   }
 }
