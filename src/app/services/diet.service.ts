@@ -17,7 +17,7 @@ export class DietService {
     return this.api.get<DietResponse>(
       `${
         environment.diet
-      }?UserId=${userId}&PlanId=11&Date=${date.toDateString()}&Type=1`
+      }?UserId=${userId}&PlanId=11&Date=${date.toLocaleDateString()}&Type=1`
     );
   }
 

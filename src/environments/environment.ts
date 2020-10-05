@@ -9,6 +9,7 @@ export const environment = {
   users: 'Users',
   diet: 'Diet',
   foods: 'Foods',
+  progress: 'api/Progress',
 };
 
 /*
