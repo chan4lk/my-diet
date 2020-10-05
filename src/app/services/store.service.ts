@@ -6,9 +6,12 @@ import { UserDetailsResponse } from '../models/user.model';
   providedIn: 'root',
 })
 export class StoreService {
-  private user: BehaviorSubject<UserDetailsResponse> = new BehaviorSubject(
-    null
-  );
+  private user: BehaviorSubject<UserDetailsResponse> = new BehaviorSubject({
+    id: 0,
+    name: '',
+    surname: '',
+    email: '',
+  });
 
   public userData$ = this.user.asObservable();
 

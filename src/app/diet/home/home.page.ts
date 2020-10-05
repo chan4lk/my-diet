@@ -36,7 +36,9 @@ export class HomePage implements OnInit, OnDestroy {
       sound: true ? 'file://sound.mp3' : 'file://beep.caf',
       data: { secret: 'abc' },
     });
+  }
 
+  ionViewWillEnter() {
     this.doRefresh(null);
   }
 

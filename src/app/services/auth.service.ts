@@ -4,22 +4,24 @@ import { environment } from 'src/environments/environment';
 import { ApiService } from './api.service';
 import { map, switchMap } from 'rxjs/operators';
 import { SignupModel } from '../models/auth.models';
+import { StorageService } from './storage.service';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   /**
-   *
+   * Create an instance of the AuthService
    */
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private storage: StorageService) {}
 
+  // tslint:disable-next-line: variable-name
   private _token: BehaviorSubject<string> = new BehaviorSubject('');
-  private token = this._token.asObservable();
+  public token = this._token.asObservable();
 
   login(login: string, password: string) {
     return this.api.post(environment.auth, { login, password }).pipe(
       map((res: { token: string }) => {
-        localStorage.setItem('__token', res.token);
+        this.storage.setItem('__token', res);
         this._token.next(res.token);
         return res.token;
       })
