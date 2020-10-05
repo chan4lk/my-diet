@@ -15,9 +15,10 @@ ion-card {
     padding: 4px;
     .title {
       font-size: 1.5rem;
-      text-overflow: ellipsis;
-      word-wrap: normal;
       color: var(--ion-color-secondary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .breakdown {
