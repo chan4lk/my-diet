@@ -58,10 +58,12 @@ export class EditPage implements OnInit, ViewWillEnter, ViewWillLeave {
     this.form = this.fb.group({
       weight: new FormControl(0, [Validators.required]),
     });
-    this.route.paramMap.subscribe((params) => {
-      this.menu = +params.get('menu');
-      this.id = +params.get('id');
-    });
+    this.route.paramMap
+      .pipe(takeWhile(() => this.active))
+      .subscribe((params) => {
+        this.menu = +params.get('menu');
+        this.id = +params.get('id');
+      });
     this.store.diet$.pipe(takeWhile(() => this.active)).subscribe((diet) => {
       this.diet = diet;
       this.food = diet[this.menus[this.menu]].find((f) => f.id === this.id);
@@ -88,22 +90,23 @@ export class EditPage implements OnInit, ViewWillEnter, ViewWillLeave {
   }
 
   save() {
+    this.active = false;
     this.food.foodQuantity = this.form.value.weight;
     this.diet.total = this.total;
-    this.active = false;
     this.store.setDiet(this.diet);
 
     this.router.navigate(['/home']);
   }
 
   remove() {
+    this.active = false;
     this.diet[this.menus[this.menu]] = this.diet[this.menus[this.menu]].filter(
       (f) => f.id !== this.id
     );
-    this.active = false;
     const total = this.total - toCalaries(this.food.foodQuantity, this.food);
     this.diet.total = total;
     this.store.setDiet(this.diet);
+
     this.router.navigate(['/home']);
   }
 }
