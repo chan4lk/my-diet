@@ -7,7 +7,7 @@
   <ion-grid>
     <ion-row class="ion-justify-content-center">
       <ion-col size="6">
-        <app-gauge></app-gauge>
+        <app-gauge [max]="diet.total" [amount]="diet.total"></app-gauge>
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
@@ -49,34 +49,22 @@
   >
     <ion-slide>
       <ion-list *ngIf="diet">
-        <ion-item *ngFor="let item of diet.foodItems">
+        <ion-item *ngFor="let item of diet.breakfast">
           <app-food-item [value]="item"></app-food-item>
         </ion-item>
       </ion-list>
     </ion-slide>
     <ion-slide>
-      <ion-list>
-        <ion-item>
-          <app-food-item></app-food-item>
-        </ion-item>
-        <ion-item>
-          <app-food-item></app-food-item>
-        </ion-item>
-        <ion-item>
-          <app-food-item></app-food-item>
+      <ion-list *ngIf="diet">
+        <ion-item *ngFor="let item of diet.lunch">
+          <app-food-item [value]="item"></app-food-item>
         </ion-item>
       </ion-list>
     </ion-slide>
     <ion-slide>
-      <ion-list>
-        <ion-item>
-          <app-food-item></app-food-item>
-        </ion-item>
-        <ion-item>
-          <app-food-item></app-food-item>
-        </ion-item>
-        <ion-item>
-          <app-food-item></app-food-item>
+      <ion-list *ngIf="diet">
+        <ion-item *ngFor="let item of diet.dinner">
+          <app-food-item [value]="item"></app-food-item>
         </ion-item>
       </ion-list>
     </ion-slide>

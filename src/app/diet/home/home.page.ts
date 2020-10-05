@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { StoreService } from 'src/app/services/store.service';
 import { DietService } from 'src/app/services/diet.service';
 import { switchMap, takeWhile } from 'rxjs/operators';
-import { DietResponse } from 'src/app/models/diet.model';
+import { DietDetails, DietResponse } from 'src/app/models/diet.model';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit, OnDestroy {
+export class HomePage implements OnInit, ViewWillLeave, ViewWillEnter {
   slidesOptions = {
     spaceBetween: 8,
     slidesPerView: 1,
@@ -21,7 +21,12 @@ export class HomePage implements OnInit, OnDestroy {
 
   currentMenu = 0;
   active = true;
-  diet: DietResponse;
+  diet: DietDetails = {
+    breakfast: [],
+    lunch: [],
+    dinner: [],
+    total: 0,
+  };
 
   constructor(
     private localNotifications: LocalNotifications,
@@ -54,14 +59,14 @@ export class HomePage implements OnInit, OnDestroy {
         switchMap((user) => this.dietService.getDiet(user.id, new Date()))
       )
       .subscribe((diet) => {
-        this.diet = diet;
+        this.diet = this.dietService.format(diet);
         if (event) {
           event.target.complete();
         }
       });
   }
 
-  ngOnDestroy(): void {
+  ionViewWillLeave(): void {
     this.active = false;
   }
 }

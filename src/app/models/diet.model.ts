@@ -10,6 +10,13 @@ export interface DietResponse {
   foodItems: FoodItem[];
 }
 
+export interface DietDetails {
+  breakfast: FoodItem[];
+  lunch: FoodItem[];
+  dinner: FoodItem[];
+  total: number;
+}
+
 export interface FoodItem {
   id: number;
   name: string;
