@@ -41,6 +41,10 @@ export class HomePage implements OnInit, ViewWillLeave, ViewWillEnter {
       sound: true ? 'file://sound.mp3' : 'file://beep.caf',
       data: { secret: 'abc' },
     });
+
+    this.store.diet$
+      .pipe(takeWhile(() => this.active))
+      .subscribe((diet) => (this.diet = diet));
   }
 
   ionViewWillEnter() {
@@ -59,7 +63,8 @@ export class HomePage implements OnInit, ViewWillLeave, ViewWillEnter {
         switchMap((user) => this.dietService.getDiet(user.id, new Date()))
       )
       .subscribe((diet) => {
-        this.diet = this.dietService.format(diet);
+        const data = this.dietService.format(diet);
+        this.store.setDiet(data);
         if (event) {
           event.target.complete();
         }
