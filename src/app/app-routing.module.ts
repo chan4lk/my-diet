@@ -31,7 +31,7 @@ const routes: Routes = [
       import('./diet/home/home.module').then((m) => m.HomePageModule),
   },
   {
-    path: 'add',
+    path: 'add/:menu',
     canActivate: [UserGuard],
     loadChildren: () =>
       import('./diet/add/add.module').then((m) => m.AddPageModule),

@@ -8,6 +8,7 @@ export const environment = {
   auth: 'Auths',
   users: 'Users',
   diet: 'Diet',
+  foods: 'Foods',
 };
 
 /*

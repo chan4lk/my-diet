@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonSlides, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { StoreService } from 'src/app/services/store.service';
 import { DietService } from 'src/app/services/diet.service';
 import { switchMap, takeWhile } from 'rxjs/operators';
-import { DietDetails, DietResponse } from 'src/app/models/diet.model';
+import { DietDetails, FoodItem } from 'src/app/models/diet.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -77,6 +77,10 @@ export class HomePage implements OnInit, ViewWillLeave, ViewWillEnter {
           event.target.complete();
         }
       });
+  }
+
+  navigate(food: FoodItem) {
+    this.router.navigate(['/edit', food.type, food.id]);
   }
 
   ionViewWillLeave(): void {

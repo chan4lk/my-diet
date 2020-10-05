@@ -50,21 +50,30 @@
     <ion-slide>
       <ion-list *ngIf="diet">
         <ion-item *ngFor="let item of diet.breakfast">
-          <app-food-item [value]="item"></app-food-item>
+          <app-food-item
+            (clicked)="navigate(item)"
+            [value]="item"
+          ></app-food-item>
         </ion-item>
       </ion-list>
     </ion-slide>
     <ion-slide>
       <ion-list *ngIf="diet">
         <ion-item *ngFor="let item of diet.lunch">
-          <app-food-item [value]="item"></app-food-item>
+          <app-food-item
+            (clicked)="navigate(item)"
+            [value]="item"
+          ></app-food-item>
         </ion-item>
       </ion-list>
     </ion-slide>
     <ion-slide>
       <ion-list *ngIf="diet">
         <ion-item *ngFor="let item of diet.dinner">
-          <app-food-item [value]="item"></app-food-item>
+          <app-food-item
+            (clicked)="navigate(item)"
+            [value]="item"
+          ></app-food-item>
         </ion-item>
       </ion-list>
     </ion-slide>
@@ -73,7 +82,7 @@
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button><ion-icon name="add"></ion-icon></ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button [routerLink]="['/add']">
+      <ion-fab-button [routerLink]="['/add', currentMenu+1]">
         <ion-icon name="add-circle"></ion-icon>
       </ion-fab-button>
       <ion-fab-button [routerLink]="['/plan']">

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { FoodItem } from 'src/app/models/diet.model';
 
@@ -21,11 +21,13 @@ export class FoodItemComponent implements OnInit {
     isVeg: false,
     type: 0,
   };
+
+  @Output() clicked = new EventEmitter<FoodItem>();
   constructor(private router: Router) {}
 
   ngOnInit() {}
 
   navigate() {
-    this.router.navigate(['/edit', this.value.type, this.value.id]);
+    this.clicked.emit(this.value);
   }
 }

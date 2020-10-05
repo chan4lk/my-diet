@@ -2,20 +2,12 @@
 
 <ion-content>
   <ion-list>
-    <ion-item>
-      <app-food-item [showValue]="false"></app-food-item>
-    </ion-item>
-    <ion-item>
-      <app-food-item [showValue]="false"></app-food-item>
-    </ion-item>
-    <ion-item>
-      <app-food-item [showValue]="false"></app-food-item>
-    </ion-item>
-    <ion-item>
-      <app-food-item [showValue]="false"></app-food-item>
-    </ion-item>
-    <ion-item>
-      <app-food-item [showValue]="false"></app-food-item>
+    <ion-item *ngFor="let item of foods">
+      <app-food-item
+        (clicked)="clicked($event)"
+        [value]="item"
+        [showValue]="false"
+      ></app-food-item>
     </ion-item>
   </ion-list>
 </ion-content>
