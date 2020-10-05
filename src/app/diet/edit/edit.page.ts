@@ -101,6 +101,8 @@ export class EditPage implements OnInit, ViewWillEnter, ViewWillLeave {
       (f) => f.id !== this.id
     );
     this.active = false;
+    const total = this.total - toCalaries(this.food.foodQuantity, this.food);
+    this.diet.total = total;
     this.store.setDiet(this.diet);
     this.router.navigate(['/home']);
   }
