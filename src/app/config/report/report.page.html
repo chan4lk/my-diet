@@ -1,8 +1,7 @@
 <app-header [header]="'Report'"></app-header>
-<ion-content>
+<ion-content [fullscreen]="true">
   <ion-slides>
     <ion-slide>
-      <ion-text><h1>List View</h1></ion-text>
       <ion-grid>
         <ion-row>
           <ion-col
@@ -19,7 +18,7 @@
       </ion-grid>
     </ion-slide>
     <ion-slide>
-      <ion-text><h1>Graph View</h1></ion-text>
+      <ion-item><canvas #chartCanvas></canvas></ion-item>
     </ion-slide>
   </ion-slides>
 </ion-content>
