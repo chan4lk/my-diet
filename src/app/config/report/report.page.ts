@@ -5,6 +5,7 @@ import { Progress } from 'src/app/models/progress.model';
 import { ProgressService } from 'src/app/services/progress.service';
 import { StoreService } from 'src/app/services/store.service';
 import { Chart } from 'chart.js';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-report',
   templateUrl: './report.page.html',
@@ -17,7 +18,8 @@ export class ReportPage implements OnInit, ViewWillEnter {
   private barChart: Chart;
   constructor(
     private store: StoreService,
-    private progressService: ProgressService
+    private progressService: ProgressService,
+    private dateTransform: DatePipe
   ) {}
 
   ngOnInit() {}
@@ -61,7 +63,9 @@ export class ReportPage implements OnInit, ViewWillEnter {
     this.barChart = new Chart(this.canvas.nativeElement, {
       type: 'line',
       data: {
-        labels: this.progress.map((p) => p.date),
+        labels: this.progress.map((p) =>
+          this.dateTransform.transform(p.date, 'MM/dd/yyyy')
+        ),
         datasets: [
           {
             label: 'My Weight progress',
