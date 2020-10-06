@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { StoreService } from 'src/app/services/store.service';
 import { DietService } from 'src/app/services/diet.service';
-import { switchMap, takeWhile } from 'rxjs/operators';
+import { switchMap, take, takeWhile } from 'rxjs/operators';
 import { DietDetails, FoodItem } from 'src/app/models/diet.model';
 import { Router } from '@angular/router';
+import { GaugeComponent } from 'src/app/components/gauge/gauge.component';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,8 @@ export class HomePage implements OnInit, ViewWillLeave, ViewWillEnter {
     max: 0,
   };
 
+  total = 0;
+  @ViewChild(GaugeComponent, { static: true }) gauge: GaugeComponent;
   constructor(
     private localNotifications: LocalNotifications,
     private store: StoreService,
@@ -45,15 +48,21 @@ export class HomePage implements OnInit, ViewWillLeave, ViewWillEnter {
       data: { secret: 'abc' },
     });
 
-    this.store.diet$
-      .pipe(takeWhile(() => this.active))
-      .subscribe((diet) => (this.diet = diet));
+    this.store.diet$.pipe(takeWhile(() => this.active)).subscribe((diet) => {
+      this.diet = diet;
+      this.total = diet.total;
+      this.gauge.draw();
+    });
 
     this.doRefresh(null);
   }
 
   ionViewWillEnter() {
     this.active = true;
+  }
+
+  ionViewDidEnter() {
+    this.gauge.draw();
   }
 
   slideChanged(slider: IonSlides) {

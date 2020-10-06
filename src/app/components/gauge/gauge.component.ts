@@ -16,7 +16,6 @@ import { KiloFormaterPipe } from '../number-pipe/number.pipe';
   selector: 'app-gauge',
   templateUrl: './gauge.component.html',
   styleUrls: ['./gauge.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GaugeComponent implements OnInit {
   private _diet: DietDetails = {
@@ -32,7 +31,6 @@ export class GaugeComponent implements OnInit {
 
   @Input() set diet(value: DietDetails) {
     this._diet = value;
-    this.draw();
   }
 
   @Input() set total(value: number) {
@@ -66,10 +64,6 @@ export class GaugeComponent implements OnInit {
         }
       },
     });
-  }
-
-  ionViewWillEnter() {
-    this.draw();
   }
 
   private calculateData() {
