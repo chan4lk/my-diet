@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { ProgressList } from '../models/progress.model';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -14,5 +15,11 @@ export class ProgressService {
       date: date.toDateString(),
       weight,
     });
+  }
+
+  getProgress(userId: number) {
+    return this.api.get<ProgressList>(
+      `${environment.progress}/User/${userId}?Order.Ascending=false&Order.Property=date&Page.Index=1&Page.Size=50`
+    );
   }
 }
