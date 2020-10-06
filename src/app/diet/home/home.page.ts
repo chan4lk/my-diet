@@ -48,10 +48,12 @@ export class HomePage implements OnInit, ViewWillLeave, ViewWillEnter {
     this.store.diet$
       .pipe(takeWhile(() => this.active))
       .subscribe((diet) => (this.diet = diet));
+
+    this.doRefresh(null);
   }
 
   ionViewWillEnter() {
-    this.doRefresh(null);
+    this.active = true;
   }
 
   slideChanged(slider: IonSlides) {
@@ -64,9 +66,6 @@ export class HomePage implements OnInit, ViewWillLeave, ViewWillEnter {
       .pipe(
         takeWhile(() => this.active),
         switchMap((user) => {
-          if (!user.id) {
-            this.router.navigate(['/login']);
-          }
           return this.dietService.getDiet(user.id, new Date());
         })
       )
