@@ -119,7 +119,7 @@
           </ion-radio-group>
         </ion-list>
         <ion-button
-          [disabled]="targetForm.invalid"
+          [disabled]="activityForm.invalid"
           expand="full"
           (click)="next(slides)"
           class="ion-margin-top"
@@ -129,14 +129,14 @@
     </ion-slide>
     <ion-slide>
       <form
-        [formGroup]="targetForm"
+        [formGroup]="goalForm"
         class="form ion-padding-start ion-padding-end"
       >
         <ion-text>
           <h1>I Want To</h1>
         </ion-text>
         <ion-list class="ion-margin-top">
-          <ion-radio-group formControlName="target">
+          <ion-radio-group formControlName="goal">
             <ion-item>
               <ion-label>Loose Weight</ion-label>
               <ion-radio value="0"></ion-radio>
@@ -153,7 +153,7 @@
           </ion-radio-group>
         </ion-list>
         <ion-button
-          [disabled]="targetForm.invalid"
+          [disabled]="goalForm.invalid"
           expand="full"
           (click)="next(slides)"
           class="ion-margin-top"
@@ -163,20 +163,20 @@
     </ion-slide>
     <ion-slide>
       <form
-        [formGroup]="goalForm"
+        [formGroup]="targetForm"
         class="form ion-padding-start ion-padding-end"
       >
         <ion-text>
           <h1>Save Profile</h1>
         </ion-text>
-        <ion-list *ngIf="targetForm.value.target != '1'" class="ion-margin-top">
-          <ion-radio-group formControlName="goal">
+        <ion-list *ngIf="goalForm.value.goal != '1'" class="ion-margin-top">
+          <ion-radio-group formControlName="pace">
             <ion-list-header>What is your weekly goal?</ion-list-header>
             <ion-item>
               <ion-label>
                 <h2>
-                  {{targetForm.value.target == '0' ? 'Reduce': 'Gain'}} 0.25 kg
-                  per week
+                  {{goalForm.value.goal == '0' ? 'Reduce': 'Gain'}} 0.25 kg per
+                  week
                 </h2>
                 <h3>Easy</h3>
               </ion-label>
@@ -186,8 +186,8 @@
             <ion-item>
               <ion-label>
                 <h2>
-                  {{targetForm.value.target == '0' ? 'Reduce': 'Gain'}} 0.5 kg
-                  per week
+                  {{goalForm.value.goal == '0' ? 'Reduce': 'Gain'}} 0.5 kg per
+                  week
                 </h2>
                 <h3>Recommended</h3>
               </ion-label>
@@ -196,8 +196,8 @@
             <ion-item>
               <ion-label>
                 <h2>
-                  {{targetForm.value.target == '0' ? 'Reduce': 'Gain'}} 0.75 kg
-                  per week
+                  {{goalForm.value.goal == '0' ? 'Reduce': 'Gain'}} 0.75 kg per
+                  week
                 </h2>
                 <h3>Hard</h3>
               </ion-label>
@@ -206,7 +206,7 @@
             <ion-item>
               <ion-label>
                 <h2>
-                  {{targetForm.value.target == '0' ? 'Reduce': 'Gain'}} 1 kg per
+                  {{goalForm.value.goal == '0' ? 'Reduce': 'Gain'}} 1 kg per
                   week
                 </h2>
                 <h3>Very Hard</h3>
@@ -215,9 +215,9 @@
             </ion-item>
           </ion-radio-group>
         </ion-list>
-        <ion-item *ngIf="targetForm.value.target != '1'" class="ion-margin-top">
+        <ion-item *ngIf="goalForm.value.goal != '1'" class="ion-margin-top">
           <ion-label position="floating">Target Weight(kg)</ion-label>
-          <ion-input formControlName="weight" type="number"></ion-input>
+          <ion-input formControlName="target" type="number"></ion-input>
         </ion-item>
         <ion-button
           [disabled]="form.invalid || activityForm.invalid || targetForm.invalid || goalForm.invalid"
