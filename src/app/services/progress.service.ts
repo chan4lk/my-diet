@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ProgressList } from '../models/progress.model';
@@ -7,12 +8,16 @@ import { ApiService } from './api.service';
   providedIn: 'root',
 })
 export class ProgressService {
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private datePipe: DatePipe) {}
 
   update(userId: number, date: Date, weight: number) {
     return this.api.post(environment.progress, {
       userId,
-      date: date.toDateString(),
+      date: this.datePipe.transform(
+        date,
+        // tslint:disable-next-line: quotemark
+        "yyyy'-'MM'-'dd'T'HH':'mm':'ss'"
+      ),
       weight,
     });
   }
