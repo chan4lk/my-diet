@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { IonSlides, ViewWillEnter } from '@ionic/angular';
 import { switchMap, take } from 'rxjs/operators';
 import { ProfileResponse } from 'src/app/models/profile.model';
+import { UserDetailsResponse } from 'src/app/models/user.model';
 import { ProfileService } from 'src/app/services/profile.service';
 import { StoreService } from 'src/app/services/store.service';
 
@@ -19,6 +20,7 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class ProfilePage implements OnInit, ViewWillEnter {
   profile: ProfileResponse;
+  user: UserDetailsResponse;
   constructor(
     private fb: FormBuilder,
     private store: StoreService,
@@ -66,11 +68,14 @@ export class ProfilePage implements OnInit, ViewWillEnter {
     this.store.userData$
       .pipe(
         take(1),
-        switchMap((user) => this.profileService.getProfile(user.id))
+        switchMap((user) => {
+          this.user = user;
+          return this.profileService.getProfile(user.id);
+        })
       )
       .subscribe((profile) => {
-        this.profile = profile;
-        if (profile.id) {
+        if (profile && profile.id) {
+          this.profile = profile;
           this.form.patchValue({
             height: profile.age,
             weight: profile.weight,
@@ -108,6 +113,8 @@ export class ProfilePage implements OnInit, ViewWillEnter {
       pace: parseInt(this.targetForm.value.pace, 10),
       goal: parseInt(this.goalForm.value.goal, 10),
       gender: parseInt(this.form.value.gender, 10),
+      target: parseFloat(this.targetForm.value.target),
+      userId: this.user.id,
     };
     if (this.profile.id) {
       this.profileService

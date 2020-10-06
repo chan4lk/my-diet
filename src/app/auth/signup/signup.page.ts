@@ -7,8 +7,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
-import { switchMap } from 'rxjs/operators';
+import { MenuController, ToastController } from '@ionic/angular';
+import { throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { StoreService } from 'src/app/services/store.service';
 import { UserService } from 'src/app/services/user.service';
@@ -25,7 +26,8 @@ export class SignupPage implements OnInit {
     private router: Router,
     private user: UserService,
     private store: StoreService,
-    private menu: MenuController
+    private menu: MenuController,
+    private toastController: ToastController
   ) {}
   form: FormGroup;
   ngOnInit() {
@@ -74,12 +76,27 @@ export class SignupPage implements OnInit {
       .pipe(
         switchMap((token) => {
           return this.user.getByEmail(value.email);
+        }),
+        catchError(async (e) => {
+          await this.presentToast(e);
+          throw Error(e);
         })
       )
       .subscribe((user) => {
-        this.store.setUser(user);
-        this.router.navigate(['/profile']);
+        if (user) {
+          this.store.setUser(user);
+          this.router.navigate(['/profile']);
+        }
       });
+  }
+
+  async presentToast({ error }) {
+    const toast = await this.toastController.create({
+      message: error,
+      duration: 2000,
+      color: 'danger',
+    });
+    toast.present();
   }
 
   ionViewWillEnter() {

@@ -19,7 +19,10 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
-    if (!request.url.startsWith(`${environment.baseUrl}/${environment.auth}`)) {
+    if (
+      !request.url.startsWith(`${environment.baseUrl}/${environment.auth}`) &&
+      request.url !== `${environment.baseUrl}/${environment.users}`
+    ) {
       const token = this.getToken();
 
       if (!token) {

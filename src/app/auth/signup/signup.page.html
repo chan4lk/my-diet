@@ -6,42 +6,63 @@
   <ion-text color="light" class="ion-padding-top ion-text-center greeting">
     <h1 class="app-title">MY DIET</h1>
   </ion-text>
+  <ion-slides #slides>
+    <ion-slide>
+      <form [formGroup]="form" class="form ion-padding-start ion-padding-end">
+        <ion-item class="ion-margin-top">
+          <ion-label position="floating">First Name</ion-label>
+          <ion-input formControlName="firstName" type="text"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top">
+          <ion-label position="floating">Last Name</ion-label>
+          <ion-input formControlName="lastName" type="text"></ion-input>
+        </ion-item>
 
-  <form [formGroup]="form" class="form">
-    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
-      <ion-label position="floating">First Name</ion-label>
-      <ion-input formControlName="firstName" type="text"></ion-input>
-    </ion-item>
-    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
-      <ion-label position="floating">Last Name</ion-label>
-      <ion-input formControlName="lastName" type="text"></ion-input>
-    </ion-item>
-    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input formControlName="email" type="email"></ion-input>
-    </ion-item>
-    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
-      <ion-label position="floating">Password</ion-label>
-      <ion-input formControlName="password" type="password"></ion-input>
-    </ion-item>
-    <ion-item class="ion-padding-start ion-padding-end ion-margin-top">
-      <ion-label position="floating">Confirm Password</ion-label>
-      <ion-input formControlName="confirmPassword" type="password"></ion-input>
-    </ion-item>
+        <ion-button
+          [disabled]="form.get('firstName').invalid || form.get('lastName').invalid"
+          expand="full"
+          (click)="slides.slideNext()"
+          class="ion-margin-top ion-margin-bottom"
+          >NEXT</ion-button
+        >
+        <ion-button [routerLink]="['/login']" fill="clear" expand="full"
+          >LOGIN</ion-button
+        >
+      </form>
+    </ion-slide>
+    <ion-slide>
+      <form [formGroup]="form" class="form ion-padding-start ion-padding-end">
+        <ion-item class="ion-margin-top">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email" type="email"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top">
+          <ion-label position="floating">Confirm Password</ion-label>
+          <ion-input
+            formControlName="confirmPassword"
+            type="password"
+          ></ion-input>
+        </ion-item>
 
-    <ion-button
-      [disabled]="form.invalid"
-      expand="full"
-      (click)="register()"
-      class="ion-padding"
-      >REGISTER</ion-button
-    >
-    <ion-button
-      [routerLink]="['/login']"
-      fill="clear"
-      expand="full"
-      class="ion-padding ion-margin-top"
-      >LOGIN</ion-button
-    >
-  </form>
+        <ion-button
+          [disabled]="form.invalid"
+          expand="full"
+          (click)="register()"
+          class="ion-margin-top ion-margin-bottom"
+          >REGISTER</ion-button
+        >
+        <ion-button
+          [routerLink]="['/login']"
+          class="ion-margin-top ion-margin-bottom"
+          fill="clear"
+          expand="full"
+          >LOGIN</ion-button
+        >
+      </form>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
