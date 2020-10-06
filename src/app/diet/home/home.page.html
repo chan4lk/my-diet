@@ -6,8 +6,8 @@
   </ion-refresher>
   <ion-grid>
     <ion-row class="ion-justify-content-center">
-      <ion-col size="6">
-        <app-gauge [max]="diet.max" [amount]="diet.total"></app-gauge>
+      <ion-col size="12">
+        <app-gauge [diet]="diet" [total]="diet.total"></app-gauge>
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">

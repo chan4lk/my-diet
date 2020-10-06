@@ -32,7 +32,9 @@ export class ReportPage implements OnInit, ViewWillEnter {
       )
       .subscribe((progress) => {
         this.progress = progress.list;
-        this.draw();
+        if (progress.list.length) {
+          this.draw();
+        }
       });
   }
 
@@ -91,7 +93,6 @@ export class ReportPage implements OnInit, ViewWillEnter {
           },
         ],
       },
-      options,
     });
   }
 }

@@ -8,6 +8,7 @@ import { EditPageRoutingModule } from './edit-routing.module';
 
 import { EditPage } from './edit.page';
 import { ComponentModule } from 'src/app/components/components.module';
+import { KiloFormaterPipe } from 'src/app/components/number-pipe/number.pipe';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { ComponentModule } from 'src/app/components/components.module';
     ComponentModule,
     EditPageRoutingModule,
   ],
+  providers: [KiloFormaterPipe],
   declarations: [EditPage],
 })
 export class EditPageModule {}

@@ -21,5 +21,6 @@ import { KiloFormaterPipe } from './number-pipe/number.pipe';
     HeaderComponent,
     KiloFormaterPipe,
   ],
+  providers: [KiloFormaterPipe],
 })
 export class ComponentModule {}

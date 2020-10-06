@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { HomePage } from './home.page';
 import { ComponentModule } from 'src/app/components/components.module';
+import { KiloFormaterPipe } from 'src/app/components/number-pipe/number.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +18,6 @@ import { ComponentModule } from 'src/app/components/components.module';
     HomePageRoutingModule,
   ],
   declarations: [HomePage],
-  providers: [LocalNotifications],
+  providers: [LocalNotifications, KiloFormaterPipe],
 })
 export class HomePageModule {}
