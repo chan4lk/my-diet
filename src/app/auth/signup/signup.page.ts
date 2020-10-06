@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -23,7 +24,8 @@ export class SignupPage implements OnInit {
     private auth: AuthService,
     private router: Router,
     private user: UserService,
-    private store: StoreService
+    private store: StoreService,
+    private menu: MenuController
   ) {}
   form: FormGroup;
   ngOnInit() {
@@ -78,5 +80,14 @@ export class SignupPage implements OnInit {
         this.store.setUser(user);
         this.router.navigate(['/profile']);
       });
+  }
+
+  ionViewWillEnter() {
+    this.auth.logout();
+    this.menu.enable(false);
+  }
+
+  ionViewWillLeave() {
+    this.menu.enable(true);
   }
 }

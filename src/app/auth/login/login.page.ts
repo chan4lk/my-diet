@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ViewWillEnter } from '@ionic/angular';
-import { map, switchMap } from 'rxjs/operators';
+import { MenuController, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
+import { switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { StoreService } from 'src/app/services/store.service';
 import { UserService } from 'src/app/services/user.service';
@@ -11,18 +11,24 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit, ViewWillEnter {
+export class LoginPage implements OnInit, ViewWillEnter, ViewWillLeave {
   constructor(
     private auth: AuthService,
     private user: UserService,
     private store: StoreService,
-    private router: Router
+    private router: Router,
+    private menu: MenuController
   ) {}
 
   ngOnInit() {}
 
   ionViewWillEnter() {
     this.auth.logout();
+    this.menu.enable(false);
+  }
+
+  ionViewWillLeave() {
+    this.menu.enable(true);
   }
 
   login(email, password) {
