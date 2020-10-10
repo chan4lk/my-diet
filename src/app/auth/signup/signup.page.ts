@@ -7,9 +7,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MenuController, ToastController } from '@ionic/angular';
+import {
+  MenuController,
+  ModalController,
+  ToastController,
+} from '@ionic/angular';
 import { throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
+import { ConsentComponent } from 'src/app/components/consent/consent.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { StoreService } from 'src/app/services/store.service';
 import { UserService } from 'src/app/services/user.service';
@@ -27,7 +32,8 @@ export class SignupPage implements OnInit {
     private user: UserService,
     private store: StoreService,
     private menu: MenuController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private modalController: ModalController
   ) {}
   form: FormGroup;
   ngOnInit() {
@@ -58,36 +64,54 @@ export class SignupPage implements OnInit {
     }
   }
 
-  register() {
-    const value = this.form.value;
+  async register() {
+    const { accepted } = await this.presentModal();
 
-    this.auth
-      .signup({
-        id: 0,
-        email: value.email,
-        name: value.firstName,
-        surname: value.lastName,
-        auth: {
-          login: value.email,
-          password: value.password,
-          roles: 1,
-        },
-      })
-      .pipe(
-        switchMap((token) => {
-          return this.user.getByEmail(value.email);
-        }),
-        catchError(async (e) => {
-          await this.presentToast(e);
-          throw Error(e);
+    if (accepted) {
+      const value = this.form.value;
+      this.auth
+        .signup({
+          id: 0,
+          email: value.email,
+          name: value.firstName,
+          surname: value.lastName,
+          auth: {
+            login: value.email,
+            password: value.password,
+            roles: 1,
+          },
         })
-      )
-      .subscribe((user) => {
-        if (user) {
-          this.store.setUser(user);
-          this.router.navigate(['/profile']);
-        }
-      });
+        .pipe(
+          switchMap((token) => {
+            return this.user.getByEmail(value.email);
+          }),
+          catchError(async (e) => {
+            await this.presentToast(e);
+            throw Error(e);
+          })
+        )
+        .subscribe((user) => {
+          if (user) {
+            this.store.setUser(user);
+            this.router.navigate(['/profile']);
+          }
+        });
+    } else {
+      navigator['app'].exitApp();
+    }
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: ConsentComponent,
+      cssClass: 'my-custom-class',
+      componentProps: {},
+    });
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+
+    return data;
   }
 
   async presentToast({ error }) {

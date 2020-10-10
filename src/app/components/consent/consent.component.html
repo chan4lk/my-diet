@@ -1,0 +1,49 @@
+<ion-content class="ion-padding">
+  <ion-text>
+    <h1>Medical Disclaimer</h1>
+    <p>
+      The MyDiet app has been developed based on certain health parameters.
+      However each individual is different, and you should consult with your
+      personal healthcare provider before beginning any significant weight
+      modification program.DO NOT BEGIN USING THE MY DIET APP IF YOU HAVE NOT
+      RECEIVED MEDICAL CLEARANCE FROM YOUR PERSONAL HEALTHCARE PROVIDER.
+    </p>
+    <h3>DO Not Use The App IF:</h3>
+    <ul>
+      <li>Your age is less than 18 years, or over 65 years</li>
+      <li>Your height is under 54 inches tall, or over 84 inches tall</li>
+      <li>Your weight is over 350 pounds</li>
+      <li>Your Body Mass Index (BMI) is less than 17</li>
+      <li>
+        Your are a transgender individual currently undergoing hormone therapy
+      </li>
+      <li>You are currently breastfeeding</li>
+      <li>You have been diagnosed with heart disease</li>
+      <li>You have been diagnosed with thyroid cancer</li>
+      <li>You have polycystic ovary syndrome</li>
+      <li>You are pregnant</li>
+    </ul>
+    <p>
+      I understand and am aware of all above details. In addition, I certify
+      that I am 18 years of age or older.
+    </p>
+
+    <p>
+      I agree that I am eligible to use the app according to the exclusions
+      detailed above.
+    </p>
+  </ion-text>
+  <ion-button
+    expand="full"
+    class="ion-margin-top ion-margin-bottom"
+    (click)="dismiss(true)"
+    >Accept</ion-button
+  >
+  <ion-button
+    expand="full"
+    class="ion-margin-top ion-margin-bottom"
+    color="danger"
+    (click)="dismiss(false)"
+    >Reject</ion-button
+  >
+</ion-content>
