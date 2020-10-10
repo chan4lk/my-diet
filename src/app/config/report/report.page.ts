@@ -43,20 +43,20 @@ export class ReportPage implements OnInit, ViewWillEnter {
       responsive: false,
       maintainAspectRatio: false,
       legend: {
-        fontColor: 'white',
+        fontColor: '#000000',
       },
       scales: {
         xAxes: [
           {
             ticks: {
-              fontColor: 'white',
+              fontColor: '#000000',
             },
           },
         ],
         yAxes: [
           {
             ticks: {
-              fontColor: 'white',
+              fontColor: '#000000',
             },
           },
         ],
@@ -79,7 +79,7 @@ export class ReportPage implements OnInit, ViewWillEnter {
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: ' #ff6644',
+            pointBorderColor: ' #000000',
             pointBackgroundColor: '#fff',
             pointBorderWidth: 1,
             pointHoverRadius: 5,

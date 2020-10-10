@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -12,6 +12,7 @@ import { ProfileResponse } from 'src/app/models/profile.model';
 import { UserDetailsResponse } from 'src/app/models/user.model';
 import { ProfileService } from 'src/app/services/profile.service';
 import { StoreService } from 'src/app/services/store.service';
+import { async } from 'rxjs/internal/scheduler/async';
 
 @Component({
   selector: 'app-profile',
@@ -31,14 +32,14 @@ export class ProfilePage implements OnInit, ViewWillEnter {
   targetForm: FormGroup;
   goalForm: FormGroup;
   activityForm: FormGroup;
-
+  @ViewChild(IonSlides, {static: true}) slides: IonSlides;
   ngOnInit() {
     this.form = this.fb.group({
       height: new FormControl('', Validators.required),
       weight: new FormControl('', Validators.required),
       age: new FormControl('', Validators.required),
       gender: new FormControl(0, Validators.required),
-      isVeg: new FormControl(true, [])
+      isVeg: new FormControl(true, []),
     });
     this.activityForm = this.fb.group({
       activityLevel: new FormControl('0', Validators.required),
@@ -66,6 +67,7 @@ export class ProfilePage implements OnInit, ViewWillEnter {
   }
 
   ionViewWillEnter() {
+    this.slides.slideTo(0);
     this.store.userData$
       .pipe(
         take(1),
@@ -82,7 +84,7 @@ export class ProfilePage implements OnInit, ViewWillEnter {
             weight: profile.weight,
             age: profile.age,
             gender: profile.gender.toString(),
-            isVeg: profile.isVeg
+            isVeg: profile.isVeg,
           });
 
           this.activityForm.patchValue({
@@ -121,13 +123,15 @@ export class ProfilePage implements OnInit, ViewWillEnter {
     if (this.profile.id) {
       this.profileService
         .updateProfile(this.profile.id, this.profile)
-        .subscribe(() => this.router.navigate(['/home']));
+        .subscribe(() => {
+          // await slides.slideTo(0);
+          this.router.navigate(['/home']);
+        });
     } else {
-      this.profileService
-        .createProfile(this.profile)
-        .subscribe(() => this.router.navigate(['/home']));
+      this.profileService.createProfile(this.profile).subscribe(() => {
+        // await slides.slideTo(0);
+        this.router.navigate(['/home']);
+      });
     }
   }
-
-
 }
