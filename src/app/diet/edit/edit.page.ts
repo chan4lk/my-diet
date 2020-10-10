@@ -6,22 +6,34 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ViewWillEnter, ViewWillLeave } from '@ionic/angular';
+import { ViewWillEnter, ViewWillLeave, ToastController } from '@ionic/angular';
 import { takeWhile } from 'rxjs/operators';
 import { DietDetails, FoodItem } from 'src/app/models/diet.model';
 import { StoreService } from 'src/app/services/store.service';
 import { toCalaries, toFixed } from 'src/app/services/utils';
+import { RatingService } from 'src/app/services/rating.service';
+import { RatingResponse } from 'src/app/models/rating.model';
+import { UserDetailsResponse } from 'src/app/models/user.model';
+import { DatePipe } from '@angular/common';
+import { async } from '@angular/core/testing';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.page.html',
   styleUrls: ['./edit.page.scss'],
 })
 export class EditPage implements OnInit, ViewWillEnter, ViewWillLeave {
+  downColor = 'primary';
+  upColor = 'primary';
+  rating: RatingResponse;
+  user: UserDetailsResponse;
   constructor(
     private store: StoreService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private ratingService: RatingService,
+    private router: Router,
+    private datePipe: DatePipe,
+    private toastController: ToastController
   ) {}
   private menus = {
     1: 'breakfast',
@@ -83,10 +95,41 @@ export class EditPage implements OnInit, ViewWillEnter, ViewWillLeave {
 
   ionViewWillEnter() {
     this.active = true;
+    this.store.userData$.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   ionViewWillLeave() {
     this.active = false;
+  }
+
+  rate(userRate) {
+    this.rating = {
+      id: 0,
+      userId: this.user.id,
+      foodId: this.food.id,
+      rating: userRate,
+      date: this.datePipe.transform(
+        new Date(),
+        // tslint:disable-next-line: quotemark
+        "yyyy'-'MM'-'dd'T'HH':'mm':'ss'"
+      ),
+    };
+
+    if (userRate < 1) {
+      this.downColor = 'danger';
+      this.upColor = 'primary';
+    }else{
+      this.downColor = 'primary';
+      this.upColor = 'success';
+    }
+
+    this.ratingService.createRating(this.rating).subscribe(async (status) => {
+      if (status) {
+        await this.presentToast();
+      }
+    });
   }
 
   save() {
@@ -108,5 +151,14 @@ export class EditPage implements OnInit, ViewWillEnter, ViewWillLeave {
     this.store.setDiet(this.diet);
 
     this.router.navigate(['/home']);
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Thank you for rating',
+      duration: 2000,
+      color: 'success',
+    });
+    toast.present();
   }
 }

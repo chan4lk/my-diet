@@ -7,6 +7,18 @@
         <app-gauge [diet]="diet" [total]="total"></app-gauge>
       </ion-col>
     </ion-row>
+    <ion-row class="ion-justify-content-around">
+      <ion-col size="3">
+        <ion-button (click)="rate(-1)" [color]="downColor">
+          <ion-icon slot="icon-only" name="thumbs-down"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button (click)="rate(1)" [color]="upColor">
+          <ion-icon slot="icon-only" name="thumbs-up"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
   <form [formGroup]="form" class="form">
     <ion-item class="ion-padding-start ion-padding-end ion-margin-top">

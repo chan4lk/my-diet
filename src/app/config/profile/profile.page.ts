@@ -126,4 +126,6 @@ export class ProfilePage implements OnInit, ViewWillEnter {
         .subscribe(() => this.router.navigate(['/home']));
     }
   }
+
+
 }
