@@ -38,6 +38,7 @@ export class ProfilePage implements OnInit, ViewWillEnter {
       weight: new FormControl('', Validators.required),
       age: new FormControl('', Validators.required),
       gender: new FormControl(0, Validators.required),
+      isVeg: new FormControl(true, [])
     });
     this.activityForm = this.fb.group({
       activityLevel: new FormControl('0', Validators.required),
@@ -81,6 +82,7 @@ export class ProfilePage implements OnInit, ViewWillEnter {
             weight: profile.weight,
             age: profile.age,
             gender: profile.gender.toString(),
+            isVeg: profile.isVeg
           });
 
           this.activityForm.patchValue({
