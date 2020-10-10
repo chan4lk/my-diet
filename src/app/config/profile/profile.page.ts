@@ -77,7 +77,7 @@ export class ProfilePage implements OnInit, ViewWillEnter {
         if (profile && profile.id) {
           this.profile = profile;
           this.form.patchValue({
-            height: profile.age,
+            height: profile.height,
             weight: profile.weight,
             age: profile.age,
             gender: profile.gender.toString(),

@@ -16,13 +16,13 @@ export class ProfileService {
   }
 
   updateProfile(id: number, profile: ProfileResponse) {
-    return this.api.put<ProfileResponse>(
+    return this.api.put<number>(
       `${environment.profile}/${id}`,
       profile
     );
   }
 
   createProfile(profile: ProfileResponse) {
-    return this.api.post<ProfileResponse>(`${environment.profile}`, profile);
+    return this.api.post<number>(`${environment.profile}`, profile);
   }
 }
