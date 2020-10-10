@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { DietDetails, DietResponse, FoodItem } from '../models/diet.model';
@@ -11,13 +12,17 @@ export class DietService {
   /**
    *
    */
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private datePipe: DatePipe) {}
 
   getDiet(userId: number, date: Date) {
     return this.api.get<DietResponse>(
       `${
         environment.diet
-      }?UserId=${userId}&PlanId=11&Date=${date.toLocaleDateString()}&Type=1`
+      }?UserId=${userId}&PlanId=11&Date=${this.datePipe.transform(
+        date,
+        // tslint:disable-next-line: quotemark
+        "yyyy'-'MM'-'dd'T'HH':'mm':'ss'"
+      )}&Type=1`
     );
   }
 
