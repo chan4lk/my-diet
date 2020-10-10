@@ -1,5 +1,5 @@
 <ion-card (click)="navigate()">
-  <div class="img"><img src="/assets/images/salad.jpg" /></div>
+  <div class="img"><img [src]="'/assets/images/'+value.id+'.jpg'" /></div>
 
   <div class="info">
     <ion-label class="title"
