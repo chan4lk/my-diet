@@ -50,19 +50,19 @@ export class ProfilePage implements OnInit, ViewWillEnter {
     });
     this.targetForm = this.fb.group({
       pace: new FormControl('0', []),
-      target: new FormControl('0', [Validators.required, Validators.min(1)]),
+      targetWeight: new FormControl('0', [Validators.required, Validators.min(1)]),
     });
 
     this.goalForm.valueChanges.subscribe((values) => {
       if (values.goal !== '1') {
-        this.targetForm.controls.target.setValidators([
+        this.targetForm.controls.targetWeight.setValidators([
           Validators.required,
           Validators.min(1),
         ]);
       } else {
-        this.targetForm.controls.target.clearValidators();
+        this.targetForm.controls.targetWeight.clearValidators();
       }
-      this.targetForm.controls.target.updateValueAndValidity();
+      this.targetForm.controls.targetWeight.updateValueAndValidity();
     });
   }
 
@@ -93,7 +93,7 @@ export class ProfilePage implements OnInit, ViewWillEnter {
 
           this.targetForm.patchValue({
             pace: profile.pace.toString(),
-            target: profile.target,
+            targetWeight: profile.targetWeight,
           });
 
           this.goalForm.patchValue({
@@ -117,7 +117,7 @@ export class ProfilePage implements OnInit, ViewWillEnter {
       pace: parseInt(this.targetForm.value.pace, 10),
       goal: parseInt(this.goalForm.value.goal, 10),
       gender: parseInt(this.form.value.gender, 10),
-      target: parseFloat(this.targetForm.value.target),
+      targetWeight: parseFloat(this.targetForm.value.targetWeight),
       userId: this.user.id,
     };
     if (this.profile.id) {

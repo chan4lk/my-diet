@@ -5,7 +5,7 @@ export interface ProfileResponse {
   age: number;
   gender: number;
   weight: number;
-  target: number;
+  targetWeight: number;
   height: number;
   isVeg: boolean;
   userId: number;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
-import { switchMap } from 'rxjs/operators';
+import { MenuController, ViewWillEnter, ViewWillLeave, ToastController } from '@ionic/angular';
+import { switchMap, catchError } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { StoreService } from 'src/app/services/store.service';
 import { UserService } from 'src/app/services/user.service';
@@ -17,7 +17,8 @@ export class LoginPage implements OnInit, ViewWillEnter, ViewWillLeave {
     private user: UserService,
     private store: StoreService,
     private router: Router,
-    private menu: MenuController
+    private menu: MenuController,
+    private toastController: ToastController,
   ) {}
 
   ngOnInit() {}
@@ -37,11 +38,24 @@ export class LoginPage implements OnInit, ViewWillEnter, ViewWillLeave {
       .pipe(
         switchMap((token) => {
           return this.user.getByEmail(email);
+        }),
+        catchError(async (e) => {
+          await this.presentToast(e);
+          throw Error(e);
         })
       )
       .subscribe((user) => {
         this.store.setUser(user);
         this.router.navigate(['/home']);
       });
+  }
+
+  async presentToast({ error }) {
+    const toast = await this.toastController.create({
+      message: error,
+      duration: 2000,
+      color: 'danger',
+    });
+    toast.present();
   }
 }
