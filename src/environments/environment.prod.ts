@@ -7,4 +7,5 @@ export const environment = {
   foods: 'Foods',
   progress: 'api/Progress',
   profile: 'Profiles',
+  rating: 'api/Rating',
 };
